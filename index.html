@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Knitting Counter</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- iOS home screen support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Knitting Counter">
+
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Knitting Counter</h1>
+
+  <div>
+    <p><strong>Row:</strong> <span id="row">0</span></p>
+
+    <button onclick="changeRow(1)">+1 Row</button>
+    <button onclick="changeRow(-1)">-1 Row</button>
+  </div>
+
+  <script>
+    // Load saved progress
+    let row = parseInt(localStorage.getItem('row') || '0');
+
+    function updateDisplay() {
+      document.getElementById('row').textContent = row;
+    }
+
+    function changeRow(delta) {
+      row += delta;
+      if (row < 0) row = 0;
+      updateDisplay();
+      localStorage.setItem('row', row);
+    }
+
+    updateDisplay();
+
+    // Register service worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
