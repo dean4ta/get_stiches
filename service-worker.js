@@ -1,7 +1,8 @@
-const CACHE_NAME = "knitting-counter-v1";
+const CACHE_NAME = "knitting-counter-v1.1";
 const ASSETS = [
   "./",
   "./index.html",
+  "./app.js",
   "./manifest.json"
 ];
 
